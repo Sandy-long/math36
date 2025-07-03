@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>趣味数学36：浓度与经济问题</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        h3 {
+            color: #16a085;
+            margin-top: 20px;
+        }
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .method {
+            background-color: #f1f9fe;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        .method-title {
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        .question {
+            font-weight: bold;
+            margin: 20px 0 10px;
+            color: #e74c3c;
+        }
+        .answer {
+            color: #27ae60;
+            margin-left: 20px;
+            padding-left: 10px;
+            border-left: 2px solid #2ecc71;
+        }
+        
+        /* 十字交叉法动画 */
+        .cross-animation {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            margin: 20px auto;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .cross-line {
+            position: absolute;
+            width: 80%;
+            height: 2px;
+            background-color: #e74c3c;
+            animation: crossLine 3s infinite;
+        }
+        .cross-line.vertical {
+            transform: rotate(90deg);
+            background-color: #3498db;
+            animation-delay: 1.5s;
+        }
+        .solution-bubble {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #2ecc71;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            animation: bubblePulse 2s infinite;
+        }
+        @keyframes crossLine {
+            0%, 100% { width: 80%; }
+            50% { width: 100%; }
+        }
+        @keyframes bubblePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* 分阶段销售动画 */
+        .sales-animation {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            margin: 20px auto;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .sales-stage {
+            position: absolute;
+            width: 30%;
+            height: 80px;
+            background-color: #3498db;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            animation: stageSlide 6s infinite;
+        }
+        .sales-stage:nth-child(2) {
+            background-color: #e74c3c;
+            animation-delay: 2s;
+        }
+        .sales-stage:nth-child(3) {
+            background-color: #2ecc71;
+            animation-delay: 4s;
+        }
+        @keyframes stageSlide {
+            0%, 33%, 100% { left: -30%; top: 50%; transform: translateY(-50%); }
+            16.5%, 49.5% { left: 35%; top: 50%; transform: translateY(-50%); }
+        }
+        
+        /* 物不知数动画 */
+        .remainder-animation {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            margin: 20px auto;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .number-box {
+            position: absolute;
+            width: 60px;
+            height: 50px;
+            background-color: #f1c40f;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            animation: numberSearch 6s infinite;
+        }
+        .divisor {
+            position: absolute;
+            font-size: 12px;
+            color: #333;
+        }
+        @keyframes numberSearch {
+            0%, 33% { left: 10%; top: 50%; transform: translateY(-50%); background-color: #f1c40f; }
+            16.5% { background-color: #e74c3c; }
+            33.1%, 66% { left: 50%; top: 50%; transform: translateY(-50%); background-color: #3498db; }
+            49.5% { background-color: #e74c3c; }
+            66.1%, 100% { left: 80%; top: 50%; transform: translateY(-50%); background-color: #2ecc71; }
+            82.5% { background-color: #e74c3c; }
+        }
+    </style>
+</head>
+<body>
+    <h1>趣味数学36</h1>
+    <h2>浓度与经济问题</h2>
+    
+    <h3>1. 十字交叉法</h3>
+    
+    <div class="section">
+        <div class="cross-animation">
+            <div class="cross-line"></div>
+            <div class="cross-line vertical"></div>
+            <div class="solution-bubble">15%</div>
+        </div>
+        
+        <div class="method">
+            <p><strong>运算法则：</strong></p>
+            <ul>
+                <li>用于求混合液体或混合物的浓度</li>
+                <li>比例关系通过十字交叉法计算</li>
+                <li>公式：(高浓度-混合浓度):(混合浓度-低浓度)=低浓度溶液量:高浓度溶液量</li>
+            </ul>
+        </div>
+        
+        <div class="question">10%盐水和20%盐水混合，求混合浓度是多少？</div>
+        <div class="answer">15%</div>
+        
+        <div class="question">用10%盐水和20%盐水配制500克15%的盐水，两种盐水各需多少克？</div>
+        <div class="answer">需10%盐水250克，20%盐水250克</div>
+        
+        <div class="question">用10%、15%、25%三种盐水配制1000克18%的盐水，要求：
+
+15%盐水用量不超过400克，
+25%盐水至少用200克，
+求各需多少克？</div>
+        <div class="answer">需25%盐水200克，15%盐水400克，10%盐水400克</div>
+    </div>
+    
+    <h3>2. 分阶段销售</h3>
+    
+    <div class="section">
+        <div class="sales-animation">
+            <div class="sales-stage">第一批</div>
+            <div class="sales-stage">第二批</div>
+            <div class="sales-stage">第三批</div>
+        </div>
+        
+        <div class="method">
+            <p><strong>运算法则：</strong></p>
+            <ul>
+                <li>计算分阶段销售的利润或成本</li>
+                <li>利润 = 总收入 - 总成本</li>
+                <li>总收入 = Σ(各阶段销量×单价)</li>
+                <li>总利润 = Σ(各阶段销量×(单价-成本))</li>
+            </ul>
+        </div>
+        
+        <div class="question">某商品分两次销售：
+
+第一次卖出80件，单价25元；
+第二次卖出120件，单价22元。
+计算总收入是多少？</div>
+        <div class="answer">4640元</div>
+        
+        <div class="question">商品进价15元，分两批销售：
+
+第一批卖出60件，售价20元；
+第二批卖出40件，售价25元。
+计算总利润是多少？</div>
+        <div class="answer">700元</div>
+        
+        <div class="question">某电子产品分三阶段销售：
+
+​​预售期​​：限量100台，售价 = 成本价 × 110%，
+实际售出80台。
+​​​​首发期​​：售价 = 预售价 × 120%，
+售出200台（不设折扣）。
+​​​​清仓期​​：剩余库存按成本价销售。
+​​已知
+单台成本价 = 300元，
+​​最终总利润率为25%​​。
+​​​​<br>求​​：
+（1）总库存量（N）是多少台？
+（2）清仓期售出多少台？</div>
+        <div class="answer">
+            总库存量​​：288台；
+​​清仓期销量​​：8台
+        </div>
+    </div>
+    
+    <h3>3. 物不知数问题</h3>
+    
+    <div class="section">
+        <div class="remainder-animation">
+            <div class="number-box">?</div>
+            <div class="divisor" style="left: 12%; top: 25%;">÷3余2</div>
+            <div class="divisor" style="left: 51%; top: 25%;">÷5余3</div>
+            <div class="divisor" style="left: 82%; top: 25%;">÷7余4</div>
+        </div>
+        
+        <div class="method">
+            <p><strong>运算法则：</strong></p>
+            <ul>
+                <li>解同余方程组，寻找满足条件的最小正整数</li>
+                <li>常用方法有中国剩余定理或逐步试验</li>
+                <li>步骤：先满足一个条件，再逐步增加其他条件</li>
+            </ul>
+        </div>
+        
+        <div class="question">一个数除以2余1，除以3余2，求最小的满足条件的正整数。</div>
+        <div class="answer">
+            5
+        </div>
+        
+        <div class="question">一个数除以4余1，除以5余3，求最小的满足条件的数。</div>
+        <div class="answer">
+           13
+        </div>
+        
+        <div class="question">一个数除以3余2，除以5余3，除以7余4，求最小的正整数解。</div>
+        <div class="answer">
+            23
+        </div>
+    </div>
+</body>
+</html>
