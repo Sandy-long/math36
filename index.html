@@ -45,21 +45,49 @@
             margin-bottom: 20px;
             border-left: 4px solid #3498db;
         }
-        .method-title {
-            font-weight: bold;
-            color: #2980b9;
-            margin-bottom: 10px;
-        }
         .question {
             font-weight: bold;
             margin: 20px 0 10px;
             color: #e74c3c;
         }
+        .answer-container {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 1px solid #d1fae5;
+            border-radius: 8px;
+            padding: 5px 15px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .answer-container:hover {
+            background: linear-gradient(135deg, #dcffe4 0%, #c6f6d5 100%);
+            transform: translateX(5px);
+        }
+        .answer-prompt {
+            color: #10b981;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+        .answer-prompt:before {
+            content: "✨";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
         .answer {
-            color: #27ae60;
+            color: #0f9d58;
             margin-left: 20px;
-            padding-left: 10px;
-            border-left: 2px solid #2ecc71;
+            padding: 10px 15px;
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid #10b981;
+            border-radius: 0 8px 8px 0;
+            display: none;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease;
+        }
+        .show-answer .answer {
+            display: block;
         }
         
         /* 十字交叉法动画 */
@@ -183,15 +211,21 @@
             66.1%, 100% { left: 80%; top: 50%; transform: translateY(-50%); background-color: #2ecc71; }
             82.5% { background-color: #e74c3c; }
         }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
     <h1>趣味数学36</h1>
+    
     <h2>浓度与经济问题</h2>
     
-    <h3>1. 十字交叉法</h3>
-    
     <div class="section">
+        <h3>1. 十字交叉法</h3>
+        
         <div class="cross-animation">
             <div class="cross-line"></div>
             <div class="cross-line vertical"></div>
@@ -208,22 +242,30 @@
         </div>
         
         <div class="question">10%盐水和20%盐水混合，求混合浓度是多少？</div>
-        <div class="answer">15%</div>
+        <div class="answer-container">
+            <div class="answer-prompt">点击显示答案</div>
+            <div class="answer">15%（等量混合时）</div>
+        </div>
         
         <div class="question">用10%盐水和20%盐水配制500克15%的盐水，两种盐水各需多少克？</div>
-        <div class="answer">需10%盐水250克，20%盐水250克</div>
+        <div class="answer-container">
+            <div class="answer-prompt">点击显示答案</div>
+            <div class="answer">需10%盐水250克，20%盐水250克</div>
+        </div>
         
         <div class="question">用10%、15%、25%三种盐水配制1000克18%的盐水，要求：
-
 15%盐水用量不超过400克，
 25%盐水至少用200克，
 求各需多少克？</div>
-        <div class="answer">需25%盐水200克，15%盐水400克，10%盐水400克</div>
+        <div class="answer-container">
+            <div class="answer-prompt">点击显示答案</div>
+            <div class="answer">需25%盐水200克，15%盐水400克，10%盐水400克</div>
+        </div>
     </div>
     
-    <h3>2. 分阶段销售</h3>
-    
     <div class="section">
+        <h3>2. 分阶段销售</h3>
+        
         <div class="sales-animation">
             <div class="sales-stage">第一批</div>
             <div class="sales-stage">第二批</div>
@@ -241,41 +283,41 @@
         </div>
         
         <div class="question">某商品分两次销售：
-
 第一次卖出80件，单价25元；
 第二次卖出120件，单价22元。
 计算总收入是多少？</div>
-        <div class="answer">4640元</div>
+        <div class="answer-container">
+            <div class="answer-prompt">点击显示答案</div>
+            <div class="answer">4640元（80×25 + 120×22）</div>
+        </div>
         
         <div class="question">商品进价15元，分两批销售：
-
 第一批卖出60件，售价20元；
 第二批卖出40件，售价25元。
 计算总利润是多少？</div>
-        <div class="answer">700元</div>
+        <div class="answer-container">
+            <div class="answer-prompt">点击显示答案</div>
+            <div class="answer">700元（60×5 + 40×10）</div>
+        </div>
         
         <div class="question">某电子产品分三阶段销售：
-
-​​预售期​​：限量100台，售价 = 成本价 × 110%，
-实际售出80台。
-​​​​首发期​​：售价 = 预售价 × 120%，
-售出200台（不设折扣）。
-​​​​清仓期​​：剩余库存按成本价销售。
-​​已知
-单台成本价 = 300元，
-​​最终总利润率为25%​​。
-​​​​<br>求​​：
+预售期：限量100台，售价=成本价×110%，实际售出80台。
+首发期：售价=预售价×120%，售出200台（不设折扣）。
+清仓期：剩余库存按成本价销售。
+已知单台成本价=300元，最终总利润率为25%。
+求：
 （1）总库存量（N）是多少台？
 （2）清仓期售出多少台？</div>
-        <div class="answer">
-            总库存量​​：288台；
-​​清仓期销量​​：8台
+        <div class="answer-container">
+            <div class="answer-prompt">点击显示答案</div>
+            <div class="answer">总库存量：288台；
+清仓期销量：8台</div>
         </div>
     </div>
     
-    <h3>3. 物不知数问题</h3>
-    
     <div class="section">
+        <h3>3. 物不知数问题</h3>
+        
         <div class="remainder-animation">
             <div class="number-box">?</div>
             <div class="divisor" style="left: 12%; top: 25%;">÷3余2</div>
@@ -293,19 +335,45 @@
         </div>
         
         <div class="question">一个数除以2余1，除以3余2，求最小的满足条件的正整数。</div>
-        <div class="answer">
-            5
+        <div class="answer-container">
+            <div class="answer-prompt">点击显示答案</div>
+            <div class="answer">5</div>
         </div>
         
         <div class="question">一个数除以4余1，除以5余3，求最小的满足条件的数。</div>
-        <div class="answer">
-           13
+        <div class="answer-container">
+            <div class="answer-prompt">点击显示答案</div>
+            <div class="answer">13</div>
         </div>
         
         <div class="question">一个数除以3余2，除以5余3，除以7余4，求最小的正整数解。</div>
-        <div class="answer">
-            23
+        <div class="answer-container">
+            <div class="answer-prompt">点击显示答案</div>
+            <div class="answer">23</div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 点击显示答案功能
+            document.body.addEventListener('click', function(e) {
+                const container = e.target.closest('.answer-container');
+                if(container) {
+                    container.classList.toggle('show-answer');
+                }
+            });
+            
+            // 动画效果
+            const salesStages = document.querySelectorAll('.sales-stage');
+            let currentStage = 0;
+            setInterval(() => {
+                salesStages[currentStage].style.animation = 'none';
+                setTimeout(() => {
+                    salesStages[currentStage].style.animation = 'stageSlide 6s infinite';
+                }, 10);
+                currentStage = (currentStage + 1) % salesStages.length;
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
